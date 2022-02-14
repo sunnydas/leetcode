@@ -10,10 +10,10 @@ public class LongestPalindromicSubstring {
         /*
         This uses logic from : https://www.youtube.com/watch?v=XYQecbcd6_c
          */
-        // Odd case
         for (int mid = 0; mid < s.length(); mid++) {
             int left = mid;
             int right = mid;
+            // Odd case
             while (left >= 0 && right < s.length()) {
                 if (s.charAt(left) != s.charAt(right)) {
                     break;
@@ -27,12 +27,9 @@ public class LongestPalindromicSubstring {
                 left--;
                 right++;
             }
-        }
-        //even case
-        for (int mid = 0; mid < s.length(); mid++) {
-            // Mid does not exist truly
-            int left = mid;
-            int right = mid + 1;
+            //even case
+            left = mid;
+            right = mid + 1;
             while (left >= 0 && right < s.length()) {
                 if (s.charAt(left) != s.charAt(right)) {
                     break;
