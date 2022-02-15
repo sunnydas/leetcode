@@ -1,5 +1,36 @@
 public class StringToIntegerATOI {
 
+    public static int myAtoiAlt(String s) {
+        int num = 0;
+        s = s.trim();
+        boolean isPositive = true;
+        if (!s.equals("")) {
+            if (s.charAt(0) == '-') {
+                isPositive = false;
+                s = s.substring(1);
+            } else if (s.charAt(0) == '+') {
+                isPositive = true;
+                s = s.substring(1);
+            }
+            for (int i = 0; i < s.length(); i++) {
+                char current = s.charAt(i);
+                if (!Character.isDigit(current)) {
+                    break;
+                }
+                int digit = current - '0';
+                if (num > Integer.MAX_VALUE / 10 || (num == Integer.MAX_VALUE / 10 && digit > Integer.MAX_VALUE % 10)) {
+                    if (isPositive) {
+                        return Integer.MAX_VALUE;
+                    } else {
+                        return Integer.MIN_VALUE;
+                    }
+                }
+                num = 10 * num + digit;
+            }
+        }
+        return isPositive ? num : -num;
+    }
+
     public static int myAtoi(String s) {
         boolean isPositive = true;
         s = s.trim();
@@ -49,10 +80,15 @@ public class StringToIntegerATOI {
 
     public static void main(String[] args) {
         System.out.println(myAtoi("42"));
+        System.out.println(myAtoiAlt("42"));
         System.out.println(myAtoi("   -42"));
+        System.out.println(myAtoiAlt("    -42"));
         System.out.println(myAtoi("4193 with words"));
+        System.out.println(myAtoiAlt("4193 with words"));
         System.out.println(myAtoi("-91283472332"));
+        System.out.println(myAtoiAlt("-91283472332"));
         System.out.println(myAtoi("20000000000000000000"));
+        System.out.println(myAtoiAlt("20000000000000000000"));
     }
 
 }
