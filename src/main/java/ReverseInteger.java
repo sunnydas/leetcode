@@ -7,6 +7,8 @@ public class ReverseInteger {
         while (x != 0) {
             int pop = x % 10;
             x /= 10;
+            System.out.println(pop);
+            System.out.println(x);
             if (rev > Integer.MAX_VALUE || rev > Integer.MAX_VALUE / 10) {
                 return 0;
             } else if (rev < Integer.MIN_VALUE || rev < Integer.MIN_VALUE / 10) {
