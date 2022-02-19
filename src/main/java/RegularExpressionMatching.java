@@ -1,11 +1,27 @@
-import java.util.regex.Pattern;
-
 public class RegularExpressionMatching {
 
-    public static boolean isMatch(String s, String p) {
+   /* public static boolean isMatch(String s, String p) {
         Pattern pattern = Pattern.compile(p);
         return pattern.matcher(s).matches();
+    }*/
+
+
+    /*
+     Editorial
+     */
+    public static boolean isMatch(String s, String p) {
+        if (p.isEmpty()) {
+            return s.isEmpty();
+        }
+        //first match logic
+        boolean firstMatch = !s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.');
+        if (p.length() >= 2 && p.charAt(1) == '*') {
+            return isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p));
+        } else {
+            return firstMatch && isMatch(s.substring(1), p.substring(1));
+        }
     }
+
 
     public static boolean isMatchAlt(String s, String p) {
         if (!p.contains(".") && !p.contains("*")) {
@@ -74,7 +90,7 @@ public class RegularExpressionMatching {
         "mississippi"
 "mis*is*ip*."
          */
-        System.out.println(isMatch("mississippi", "mis*is*ip*."));
-        System.out.println(isMatchAlt("mississippi", "mis*is*ip*."));
+        System.out.println(isMatch("ab", ".*c"));
+        //System.out.println(isMatchAlt("mississippi", "mis*is*ip*."));
     }
 }
