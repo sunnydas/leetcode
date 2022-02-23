@@ -1,5 +1,26 @@
 public class ContainerWithMostWater {
 
+    public static int maxAreaAlt(int[] heights) {
+        int maxArea = Integer.MIN_VALUE;
+        /*
+        Two pointer editorial approach
+         */
+        int i = 0;
+        int j = heights.length - 1;
+        while (i < j) {
+            int area = (j - i) * Math.min(heights[i], heights[j]);
+            if (area > maxArea) {
+                maxArea = area;
+            }
+            if (heights[i] < heights[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return maxArea;
+    }
+
     public static int maxArea(int[] heights) {
         /*
         From every point go left and right and find farthest point with
@@ -53,8 +74,13 @@ public class ContainerWithMostWater {
     public static void main(String[] args) {
         int[] input = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
         System.out.println(maxArea(input));
-        input = new int[]{1,1};
+        System.out.println(maxAreaAlt(input));
+        input = new int[]{1, 1};
         System.out.println(maxArea(input));
+        System.out.println(maxAreaAlt(input));
+        input = new int[]{2, 3, 4, 5, 18, 17, 6};
+        System.out.println(maxArea(input));
+        System.out.println(maxAreaAlt(input));
     }
 
 }
